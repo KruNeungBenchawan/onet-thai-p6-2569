@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สไลด์ติวเข้ม O-NET ภาษาไทย ป.6 ปีการศึกษา 2569 (ครบ 5 สาระ + ข้อสอบ 22 ข้อ)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Kodchasan:wght@400;500;600;700&family=Mali:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #312e81;
+            --card-bg: #ffffff;
+            --primary: #4f46e5;
+            --primary-light: #7c3aed;
+            --accent: #f59e0b;
+            --success: #059669;
+            --danger: #e11d48;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Mali', 'Kodchasan', 'Sarabun', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #312e81 0%, #581c87 50%, #831843 100%);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        .topbar {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #f472b6;
+            height: 64px;
+            flex-shrink: 0;
+        }
+
+        .topbar-title {
+            font-family: 'Kodchasan', 'Mali', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-year {
+            background: #fde047;
+            color: #1e1b4b;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            background: #334155;
+            color: #fff;
+            border: 2px solid #64748b;
+            padding: 7px 16px;
+            border-radius: 999px;
+            font-family: 'Kodchasan', 'Mali', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn:hover {
+            background: var(--primary-light);
+            border-color: #c084fc;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: var(--primary-light);
+            border-color: #3b82f6;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: #0f172a;
+            border-color: #fbbf24;
+        }
+
+        .btn-accent:hover {
+            background: #fbbf24;
+            color: #000;
+        }
+
+        .slide-select {
+            background: #0f172a;
+            color: #fff;
+            border: 1px solid #475569;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            max-width: 300px;
+        }
+
+        /* Slide Stage */
+        .stage {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 32px;
+            overflow: hidden;
+        }
+
+        .slide {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 1360px;
+            height: 100%;
+            border-radius: 28px;
+            box-shadow: 0 12px 0 #c084fc, 0 24px 60px rgba(0,0,0,0.45);
+            padding: 36px 52px;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+            border: 4px solid #e9d5ff;
+            border-top: 12px solid #ec4899;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Slide Typography for Classroom Projection */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px dashed #cbd5e1;
+            padding-bottom: 14px;
+            margin-bottom: 22px;
+        }
+
+        .strand-tag {
+            background: #fce7f3;
+            color: #be185d;
+            border: 2px solid #f9a8d4;
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-family: 'Kodchasan', 'Mali', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .slide-title {
+            font-family: 'Kodchasan', 'Mali', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.35;
+        }
+
+        .slide-body {
+            flex: 1;
+            font-size: 1.45rem;
+            line-height: 1.65;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 12px;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-left: 8px solid var(--primary-light);
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+
+        .info-card.warn {
+            background: #fffbeb;
+            border-color: #fde68a;
+            border-left-color: var(--accent);
+        }
+
+        .info-card.success {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            border-left-color: var(--success);
+        }
+
+        .info-card h3 {
+            font-size: 1.55rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        ul.slide-list {
+            padding-left: 28px;
+        }
+
+        ul.slide-list li {
+            margin-bottom: 10px;
+        }
+
+        table.slide-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 1.3rem;
+        }
+
+        table.slide-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: left;
+        }
+
+        table.slide-table td {
+            padding: 12px 16px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        table.slide-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* Quiz Question Styling */
+        .passage-box {
+            background: #f1f5f9;
+            border: 2px solid #94a3b8;
+            border-left: 8px solid #475569;
+            padding: 18px 24px;
+            border-radius: 12px;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+        }
+
+        .question-stem {
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 18px;
+        }
+
+        .choices-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .choice-item {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            padding: 14px 22px;
+            border-radius: 12px;
+            font-size: 1.45rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .choice-item:hover {
+            background: #eff6ff;
+            border-color: #3b82f6;
+        }
+
+        .choice-item.correct-revealed {
+            background: #d1fae5 !important;
+            border-color: #059669 !important;
+            font-weight: 700;
+            color: #065f46;
+        }
+
+        .choice-item.wrong-selected {
+            background: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+        }
+
+        .answer-panel {
+            margin-top: 20px;
+            background: #ecfdf5;
+            border: 3px solid #059669;
+            border-radius: 14px;
+            padding: 18px 24px;
+            font-size: 1.4rem;
+            color: #064e3b;
+            display: none;
+        }
+
+        .answer-panel.visible {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .reveal-bar {
+            margin-top: 18px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cover Slide */
+        .cover-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            border-radius: 14px;
+            padding: 40px;
+        }
+
+        .cover-badge {
+            background: var(--primary);
+            color: #fff;
+            padding: 8px 24px;
+            border-radius: 999px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cover-title {
+            font-size: 3.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .cover-sub {
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        @media print {
+            body {
+                height: auto;
+                overflow: visible;
+                background: #fff;
+            }
+            .topbar, .reveal-bar {
+                display: none !important;
+            }
+            .stage {
+                padding: 0;
+                display: block;
+            }
+            .slide {
+                display: flex !important;
+                page-break-after: always;
+                box-shadow: none;
+                border: 1px solid #cbd5e1;
+                border-top: 8px solid var(--primary);
+                margin-bottom: 20px;
+                height: auto;
+            }
+            .answer-panel {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="topbar-title">
+            <a href="index.html" class="btn" style="background:linear-gradient(90deg,#ec4899,#8b5cf6); border-color:#f9a8d4; text-decoration:none; display:inline-flex; align-items:center; gap:6px; box-shadow:0 3px 0 #9d174d;">🏠 หน้าหลัก (เมนูรวม)</a>
+            <span>🎓 สื่อการสอนขึ้นจอ : พิชิต O-NET ภาษาไทย ป.6</span>
+            <span class="badge-year">ปีการศึกษา 2569</span>
+        </div>
+        <div class="controls">
+            <select id="slideSelector" class="slide-select" onchange="goToSlide(this.value)"></select>
+            <button class="btn" onclick="prevSlide()">◀ ก่อนหน้า</button>
+            <span id="slideCounter" style="font-weight:700; min-width: 75px; text-align:center;">1 / 33</span>
+            <button class="btn btn-primary" onclick="nextSlide()">ถัดไป ▶</button>
+            <button class="btn btn-accent" id="globalRevealBtn" onclick="toggleCurrentAnswer()">💡 เฉลยข้อนี้ (Space)</button>
+            <button class="btn" onclick="toggleFullScreen()">⛶ เต็มจอ (F11)</button>
+        </div>
+    </div>
+
+    <div class="stage" id="slideContainer"></div>
+
+    <script>
+        const slidesData = [
+            // Slide 1: Cover
+            {
+                menuTitle: "1. หน้าปก : ติวเข้ม O-NET ภาษาไทย ป.6 ปี 2569",
+                type: "cover",
+                html: `
+                    <div class="cover-center">
+                        <div class="cover-badge">อ้างอิงผังการสร้างข้อสอบ (Test Blueprint) สทศ. ล่าสุด</div>
+                        <div class="cover-title">ติวเข้มพิชิต O-NET ภาษาไทย ป.6</div>
+                        <div class="cover-sub" style="margin-bottom:14px;">ประจำปีการศึกษา 2569 | สรุปครบ 5 สาระ 19 ตัวชี้วัด + ตะลุยโจทย์ 22 ข้อ (100 คะแนน)</div>
+                        <div style="background:#fce7f3; border:3px solid #f472b6; color:#be185d; padding:10px 26px; border-radius:999px; font-weight:700; font-size:1.35rem; margin-bottom:24px; box-shadow:0 4px 0 #fbcfe8;">
+                            👩‍🏫 ออกแบบและพัฒนาสื่อโดย : <strong>ครูเบ็ญจวรรณ สิงห์กุล</strong> • โรงเรียนวัดราษฎร์บำรุง สพป.สระบุรี เขต 2
+                        </div>
+                        <div class="grid-2" style="width: 100%; max-width: 960px; text-align: left;">
+                            <div class="info-card">
+                                <h3>📌 โครงสร้างข้อสอบ (เวลา 90 นาที)</h3>
+                                <ul class="slide-list">
+                                    <li><strong>ปรนัย 4 ตัวเลือก :</strong> 20 ข้อ (80 คะแนน)</li>
+                                    <li><strong>เรียงลำดับข้อความ :</strong> 1 ข้อ (5 คะแนน)</li>
+                                    <li><strong>อัตนัย (เขียนย่อความ) :</strong> 1 ข้อ (15 คะแนน)</li>
+                                </ul>
+                            </div>
+                            <div class="info-card warn">
+                                <h3>⌨️ ปุ่มลัดสำหรับคุณครูผู้สอน</h3>
+                                <ul class="slide-list">
+                                    <li>กดปุ่มลูกศร <strong>◀ / ▶</strong> เพื่อเลื่อนสไลด์</li>
+                                    <li>กดคลิกที่ตัวเลือก หรือกด <strong>Spacebar</strong> เพื่อเปิด/ซ่อนเฉลย</li>
+                                    <li>กด <strong>Ctrl + P</strong> หากต้องการสั่งพิมพ์สไลด์ทั้งหมดเป็น PDF</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 2: Test Blueprint Table
+            {
+                menuTitle: "2. ผังการสร้างข้อสอบ (Test Blueprint 2569)",
+                strand: "ภาพรวมข้อสอบ",
+                title: "สัดส่วนคะแนน O-NET ภาษาไทย ป.6 ปีการศึกษา 2569",
+                html: `
+                    <table class="slide-table">
+                        <thead>
+                            <tr>
+                                <th>สาระการเรียนรู้</th>
+                                <th>จำนวนตัวชี้วัด</th>
+                                <th>ปรนัย 4 ตัวเลือก (ข้อละ 4)</th>
+                                <th>เรียงลำดับ (ข้อละ 5)</th>
+                                <th>อัตนัยเขียนตอบ (ข้อละ 15)</th>
+                                <th>รวมคะแนน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. การอ่าน (ท 1.1)</strong></td>
+                                <td>4 ตัวชี้วัด</td>
+                                <td>6 ข้อ (24 คะแนน)</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><strong>24 คะแนน</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. การเขียน (ท 2.1)</strong></td>
+                                <td>4 ตัวชี้วัด</td>
+                                <td>2 ข้อ (8 คะแนน)</td>
+                                <td>1 ข้อ (5 คะแนน)</td>
+                                <td>1 ข้อ (15 คะแนน)</td>
+                                <td><strong>28 คะแนน 🔥</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. การฟัง การดู และการพูด (ท 3.1)</strong></td>
+                                <td>2 ตัวชี้วัด</td>
+                                <td>3 ข้อ (12 คะแนน)</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><strong>12 คะแนน</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. หลักการใช้ภาษาไทย (ท 4.1)</strong></td>
+                                <td>6 ตัวชี้วัด</td>
+                                <td>6 ข้อ (24 คะแนน)</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><strong>24 คะแนน</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. วรรณคดีและวรรณกรรม (ท 5.1)</strong></td>
+                                <td>3 ตัวชี้วัด</td>
+                                <td>3 ข้อ (12 คะแนน)</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><strong>12 คะแนน</strong></td>
+                            </tr>
+                            <tr style="background:#dbeafe; font-weight:800;">
+                                <td>รวมทั้งหมด</td>
+                                <td>19 ตัวชี้วัด</td>
+                                <td>20 ข้อ (80 คะแนน)</td>
+                                <td>1 ข้อ (5 คะแนน)</td>
+                                <td>1 ข้อ (15 คะแนน)</td>
+                                <td>100 คะแนน</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `
+            },
+            // Slide 3: สาระที่ 1 การอ่าน (1)
+            {
+                menuTitle: "3. สรุปสาระที่ 1 : การอ่าน (ความหมายโดยนัย & โวหาร)",
+                strand: "สาระที่ 1 : การอ่าน (24 คะแนน)",
+                title: "ความหมายโดยตรง vs ความหมายโดยนัย และโวหารภาพพจน์",
+                html: `
+                    <div class="grid-2">
+                        <div class="info-card">
+                            <h3>1. ความหมายโดยตรง vs โดยนัย (ท 1.1 ป.6/2)</h3>
+                            <ul class="slide-list">
+                                <li><strong>โดยตรง :</strong> แปลตามพจนานุกรม เช่น "ล้างมือให้สะอาด", "เก้าอี้ไม้"</li>
+                                <li><strong>โดยนัย (เปรียบเทียบ) :</strong>
+                                    <br>• <strong>มือสะอาด</strong> = ซื่อสัตย์สุจริต ไม่คดโกง
+                                    <br>• <strong>มือขวา</strong> = คนสนิทที่ไว้ใจช่วยงานสำคัญ
+                                    <br>• <strong>เก้าอี้</strong> = ตำแหน่งหน้าที่ | <strong>ดาว</strong> = คนเด่นดัง
+                                    <br>• <strong>หิน</strong> = ยากมาก | <strong>กล้วย/หมู</strong> = ง่ายมาก
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="info-card warn">
+                            <h3>2. โวหารและการอ่านวันเดือนปีไทย</h3>
+                            <ul class="slide-list">
+                                <li><strong>อุปมาโวหาร (เปรียบว่าเหมือน) :</strong> มีคำว่า <em>เหมือน ดุจ ดัง ดั่ง เพียง ประหนึ่ง</em></li>
+                                <li><strong>อุปลักษณ์ (เปรียบว่าเป็น) :</strong> มีคำว่า <em>เป็น คือ</em> ("ครูคือเรือจ้าง")</li>
+                                <li><strong>วันเดือนปีไทย (ไปยาลน้อย ฯ) :</strong>
+                                    <br>• เลขหน้า ฯ = วัน (1 อาทิตย์ ... 7 เสาร์)
+                                    <br>• เลขบน ฯ = ข้างขึ้น | เลขล่าง ฯ = ข้างแรม
+                                    <br>• เลขหลัง ฯ = เดือน (1 อ้าย, 2 ยี่, 3 สาม...)
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 4: สาระที่ 1 การอ่าน (2)
+            {
+                menuTitle: "4. สรุปสาระที่ 1 : ข้อเท็จจริง vs ข้อคิดเห็น & ใจความสำคัญ",
+                strand: "สาระที่ 1 : การอ่าน (24 คะแนน)",
+                title: "เทคนิคแยกข้อเท็จจริง-ข้อคิดเห็น และการจับใจความสำคัญ",
+                html: `
+                    <div class="grid-2">
+                        <div class="info-card success">
+                            <h3>✅ ข้อเท็จจริง (Fact) — ท 1.1 ป.6/4</h3>
+                            <ul class="slide-list">
+                                <li>พิสูจน์ได้ว่าเป็นจริงหรือเท็จ มีหลักฐาน ข้อมูลทางวิทยาศาสตร์ สถิติ ตัวเลขชัดเจน</li>
+                                <li>เช่น <em>"โรคไข้เลือดออกมียุงลายเป็นพาหะนำโรค"</em></li>
+                            </ul>
+                        </div>
+                        <div class="info-card warn">
+                            <h3>💭 ข้อคิดเห็น (Opinion) — ท 1.1 ป.6/4</h3>
+                            <ul class="slide-list">
+                                <li>ความรู้สึก ความเชื่อ การคาดคะเน ข้อเสนอแนะ</li>
+                                <li><strong>คีย์เวิร์ดช่วยจำ :</strong> มักมีคำว่า <strong>ควร น่าจะ คงจะ อาจ อาจจะ เหมือน คิดว่า ที่สุด</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info-card" style="margin-top:12px;">
+                        <h3>🎯 เทคนิคหาใจความสำคัญ (ท 1.1 ป.6/5) และการอ่านกราฟ/ตาราง (ป.6/7)</h3>
+                        <ul class="slide-list">
+                            <li><strong>ประโยคใจความสำคัญ :</strong> ครอบคลุมทุกส่วนของย่อหน้า (มักอยู่ต้นย่อหน้า หรือสรุปท้ายย่อหน้า) ตัดตัวเลือกที่เป็นแค่ตัวอย่างย่อยออก!</li>
+                            <li><strong>อ่านตาราง/แผนภูมิ :</strong> ระวังคำว่า <strong>"รวม", "เพิ่มขึ้น/ลดลง", "มากกว่า/น้อยกว่าอยู่เท่าไร"</strong> ต้องบวกลบตัวเลขให้ครบทุกช่อง</li>
+                        </ul>
+                    </div>
+                `
+            },
+            // Slide 5: สาระที่ 2 การเขียน (1)
+            {
+                menuTitle: "5. สรุปสาระที่ 2 : การเขียนสื่อสาร จดหมาย และเรียงลำดับ",
+                strand: "สาระที่ 2 : การเขียน (28 คะแนน)",
+                title: "การเขียนจดหมายส่วนตัว และสูตรเรียงลำดับข้อความ (5 คะแนน)",
+                html: `
+                    <div class="grid-2">
+                        <div class="info-card">
+                            <h3>✉️ จดหมายส่วนตัว (ท 2.1 ป.6/6)</h3>
+                            <ul class="slide-list">
+                                <li><strong>ถึงพ่อแม่ / ปู่ย่าตายาย :</strong><br>ขึ้นต้น: <em>กราบเท้า...ที่เคารพอย่างสูง</em><br>ลงท้าย: <em>ด้วยความเคารพอย่างสูง</em> (แทนตัว: ลูก/หลาน)</li>
+                                <li><strong>ถึงญาติผู้ใหญ่ (ลุง ป้า น้า อา) :</strong><br>ขึ้นต้น: <em>กราบเรียน...ที่เคารพรักอย่างสูง</em><br>ลงท้าย: <em>ด้วยความเคารพรักอย่างสูง</em> (แทนตัว: หลาน)</li>
+                                <li><strong>ถึงเพื่อน :</strong><br>ขึ้นต้น: <em>สวัสดี...เพื่อนรัก</em> | ลงท้าย: <em>รักและคิดถึง</em></li>
+                            </ul>
+                        </div>
+                        <div class="info-card warn">
+                            <h3>🔢 สูตรเรียงลำดับข้อความ (1 ข้อ = 5 คะแนน)</h3>
+                            <ul class="slide-list">
+                                <li><strong>ขั้นที่ 1 หาประโยคเปิดเรื่อง :</strong> ขึ้นต้นด้วยคำนามหลัก/หัวข้อเรื่อง (ห้ามขึ้นต้นด้วย <em>ดังนั้น, จึง, นอกจากนี้, จากนั้น</em>)</li>
+                                <li><strong>ขั้นที่ 2 จับคู่คำเชื่อม/ขั้นตอน :</strong> เช่น <em>เริ่มจาก... -> เมื่อครบกำหนด... -> จากนั้น...</em></li>
+                                <li><strong>ขั้นที่ 3 หาประโยคสรุปท้าย :</strong> มักมีคำว่า <em>ดังนั้น, จึง, ท้ายที่สุด, ทั้งนี้เพื่อ...</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 6: สาระที่ 2 การเขียนย่อความ (15 คะแนน)
+            {
+                menuTitle: "6. สรุปสาระที่ 2 : สูตรการเขียนย่อความ 15 คะแนนเต็ม",
+                strand: "สาระที่ 2 : การเขียน (อัตนัย 15 คะแนน)",
+                title: "คัมภีร์เขียนย่อความให้ได้ 15 คะแนนเต็ม (ข้อ 22)",
+                html: `
+                    <div class="info-card warn">
+                        <h3>📝 รูปแบบส่วนนำย่อความ (เขียนถูกได้ทันที 2-3 คะแนน!)</h3>
+                        <ul class="slide-list">
+                            <li><strong>1. นิทาน / เรื่องสั้น / บทความ / สารคดี :</strong><br>
+                            <code>ย่อ(ประเภท)... เรื่อง.............................. ของ.............................. จาก.............................. ความว่า</code></li>
+                            <li><strong>2. พระบรมราโชวาท / โอวาท / คำปราศรัย :</strong><br>
+                            <code>ย่อ(ประเภท)... ของ..................... แก่..................... เนื่องในโอกาส..................... ณ..................... เมื่อวันที่..................... ความว่า</code></li>
+                        </ul>
+                    </div>
+                    <div class="info-card success">
+                        <h3>💡 กฎเหล็ก 4 ข้อในการเขียนย่อหน้าเนื้อหา (หลังคำว่า "ความว่า")</h3>
+                        <ul class="slide-list">
+                            <li><strong>1. เปลี่ยนสรรพนามบุรุษที่ 1 และ 2 เป็นบุรุษที่ 3 ทั้งหมด :</strong> ห้ามมีคำว่า <em>ฉัน, ผม, ข้าพเจ้า, เธอ, เจ้า</em> (ให้ใช้ชื่อตัวละคร หรือ <em>เขา</em> แทน)</li>
+                            <li><strong>2. ตัดเครื่องหมายคำพูด ("...") ออกทั้งหมด :</strong> เปลี่ยนบทสนทนาเป็นประโยคเล่าเรื่อง</li>
+                            <li><strong>3. เก็บใจความสำคัญครบ (ใคร ทำอะไร ที่ไหน ผลเป็นอย่างไร ข้อคิดคืออะไร) :</strong> ตัดคำฟุ่มเฟือยออก</li>
+                            <li><strong>4. เขียนย่อหน้าเดียวต่อเนื่องกัน</strong> ด้วยลายมือบรรจง สะกดคำถูกต้อง ไม่ใช้อักษรย่อ</li>
+                        </ul>
+                    </div>
+                `
+            },
+            // Slide 7: สาระที่ 3 การฟัง การดู และการพูด
+            {
+                menuTitle: "7. สรุปสาระที่ 3 : การฟัง การดู และการพูด (12 คะแนน)",
+                strand: "สาระที่ 3 : การฟัง การดู และการพูด (12 คะแนน)",
+                title: "การตั้งคำถามเชิงเหตุผล และการวิเคราะห์ความน่าเชื่อถือของสื่อ",
+                html: `
+                    <div class="grid-2">
+                        <div class="info-card">
+                            <h3>❓ คำถามเชิงเหตุผล (ท 3.1 ป.6/2)</h3>
+                            <ul class="slide-list">
+                                <li>ไม่ใช่แค่ถามจำตัวเลข/สถานที่ แต่ต้องถามวิเคราะห์สาเหตุ ผลกระทบ หรือแนวทางแก้ปัญหา</li>
+                                <li>มักมีคำว่า <strong>"เพราะเหตุใด...", "ทำไม...", "มีแนวทางแก้ไขอย่างไร...", "ถ้า...จะเกิดผลอย่างไร"</strong></li>
+                            </ul>
+                        </div>
+                        <div class="info-card warn">
+                            <h3>📢 วิเคราะห์สื่อโฆษณา & โซเชียล (ท 3.1 ป.6/3)</h3>
+                            <ul class="slide-list">
+                                <li><strong>โฆษณาเกินจริง (ไม่น่าเชื่อถือ) :</strong> อ้างคำสุดโต่ง เช่น <em>"หายขาดทันทีใน 1 วัน", "ขาวถาวร 100%", "รักษาได้ทุกโรค"</em> ไม่มี อย. รับรอง</li>
+                                <li><strong>โฆษณาที่น่าเชื่อถือ :</strong> บอกส่วนประกอบชัดเจน มีเครื่องหมาย อย./มอก. รับรองตามจริง</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 8: สาระที่ 4 หลักการใช้ภาษาไทย (1)
+            {
+                menuTitle: "8. สรุปสาระที่ 4 : ชนิดของคำ & คำราชาศัพท์",
+                strand: "สาระที่ 4 : หลักการใช้ภาษาไทย (24 คะแนน)",
+                title: "ชนิดและหน้าที่ของคำ & กฎเหล็กคำราชาศัพท์",
+                html: `
+                    <div class="grid-2">
+                        <div class="info-card">
+                            <h3>🔤 จุดเน้นชนิดของคำ 7 ชนิด (ท 4.1 ป.6/1)</h3>
+                            <ul class="slide-list">
+                                <li><strong>อาการนาม :</strong> คำว่า <strong>"การ / ความ" + กริยาหรือวิเศษณ์</strong> เช่น การวิ่ง, ความสุข, ความดี <em>(ระวัง! การบ้าน, ความเมือง ไม่ใช่อาการนาม)</em></li>
+                                <li><strong>คำบุพบท vs คำวิเศษณ์ :</strong><br>
+                                • "วาง<strong>บน</strong>โต๊ะ" (มีคำนามตามหลัง = <strong>บุพบท</strong>)<br>
+                                • "เดินขึ้นข้าง<strong>บน</strong>" (ไม่มีนามตามหลัง = <strong>วิเศษณ์</strong>)</li>
+                            </ul>
+                        </div>
+                        <div class="info-card warn">
+                            <h3>👑 กฎเหล็กคำราชาศัพท์ (ท 4.1 ป.6/2)</h3>
+                            <ul class="slide-list">
+                                <li><strong>ทรง + คำสามัญ / นามราชาศัพท์ :</strong> เช่น ทรงม้า, ทรงกีฬา, ทรงพระอักษร, ทรงพระประชวร</li>
+                                <li><strong>ห้ามใช้ "ทรง" นำหน้ากริยาราชาศัพท์เด็ดขาด!</strong><br>
+                                ❌ ทรงเสวย, ทรงบรรทม, ทรงเสด็จ, ทรงตรัส, ทรงทอดพระเนตร (ผิดทั้งหมด!)<br>
+                                ✅ ต้องใช้: <strong>เสวย, บรรทม, เสด็จฯ, ตรัส, ทอดพระเนตร</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 9: สาระที่ 4 หลักการใช้ภาษาไทย (2)
+            {
+                menuTitle: "9. สรุปสาระที่ 4 : คำภาษาต่างประเทศ ประโยค กลอนสุภาพ สำนวน",
+                strand: "สาระที่ 4 : หลักการใช้ภาษาไทย (24 คะแนน)",
+                title: "คำยืมภาษาต่างประเทศ ชนิดประโยค กลอนสุภาพ และสำนวนไทย",
+                html: `
+                    <div class="grid-2">
+                        <div class="info-card">
+                            <h3>🌏 คำต่างประเทศ & ประโยค (ป.6/3 - ป.6/4)</h3>
+                            <ul class="slide-list">
+                                <li><strong>ภาษาเขมร :</strong> มักขึ้นต้น <em>กำ คำ จำ ดำ ตำ ทำ สำ</em> หรืออักษรนำ/ควบกล้ำ สะกดด้วย <strong>จ ร ล ญ</strong> เช่น <em>ถนน, เจริญ, เสด็จ, ตำรวจ, เดิน, สำเร็จ</em></li>
+                                <li><strong>ประโยคสามัญ :</strong> ใจความเดียว กริยาหลักตัวเดียว</li>
+                                <li><strong>ประโยครวม :</strong> เชื่อมด้วย <em>และ, แต่, หรือ, เพราะ...จึง</em></li>
+                                <li><strong>ประโยคซ้อน :</strong> มีประโยคย่อยขยาย เชื่อมด้วย <strong>ผู้, ที่, ซึ่ง, อัน, ว่า, ให้, จน</strong></li>
+                            </ul>
+                        </div>
+                        <div class="info-card warn">
+                            <h3>🌺 กลอนสุภาพ & สำนวนไทย (ป.6/5 - ป.6/6)</h3>
+                            <ul class="slide-list">
+                                <li><strong>สัมผัสกลอนสุภาพ :</strong><br>
+                                • คำท้ายวรรค 1 -> คำที่ 3 หรือ 5 ของวรรค 2<br>
+                                • คำท้ายวรรค 2 -> คำท้ายวรรค 3 -> คำที่ 3 หรือ 5 ของวรรค 4<br>
+                                • <strong>เสียงท้ายวรรค 2 :</strong> ห้ามใช้เสียงสามัญ (นิยมจัตวา/เอก/โท)</li>
+                                <li><strong>สำนวนออกบ่อย :</strong> <em>ขี่ช้างจับตั๊กแตน</em> (ลงทุนมากได้ผลน้อย), <em>วัวหายล้อมคอก</em>, <em>ชิงสุกก่อนห่าม</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 10: สาระที่ 5 วรรณคดีและวรรณกรรม
+            {
+                menuTitle: "10. สรุปสาระที่ 5 : วรรณคดีและวรรณกรรม (12 คะแนน)",
+                strand: "สาระที่ 5 : วรรณคดีและวรรณกรรม (12 คะแนน)",
+                title: "การวิเคราะห์คุณค่า ข้อคิด และการนำไปประยุกต์ใช้ในชีวิตจริง",
+                html: `
+                    <div class="info-card success">
+                        <h3>📖 3 ประเด็นหลักที่ข้อสอบวรรณคดี O-NET ถามทุกปี (ท 5.1 ป.5/2, ป.6/1, ป.6/3)</h3>
+                        <ul class="slide-list">
+                            <li><strong>1. การสรุปข้อคิด/คติเตือนใจจากนิทานพื้นบ้านหรือวรรณคดี :</strong><br>
+                            เช่น เรื่องความสามัคคี, ความกตัญญู, การพูดจาไพเราะอ่อนหวาน, ความเพียรพยายาม, การไม่ประมาท</li>
+                            <li><strong>2. การแสดงความคิดเห็นอย่างมีเหตุผลต่อตัวละครหรือเหตุการณ์ในเรื่อง :</strong><br>
+                            วิเคราะห์ว่าการกระทำของตัวละครใดเหมาะสมหรือไม่เหมาะสม เพราะเหตุใด</li>
+                            <li><strong>3. คุณค่าของวรรณคดี (ด้านสังคมวัฒนธรรม และด้านวรรณศิลป์) :</strong><br>
+                            สะท้อนวิถีชีวิต ความเชื่อ ประเพณีไทย และการนำข้อคิดไปใช้ในการเรียนและการอยู่ร่วมกับผู้อื่น</li>
+                        </ul>
+                    </div>
+                `
+            }
+        ];
+
+        const quizQuestions = [
+            {
+                no: 1,
+                strand: "ข้อที่ 1/22 | สาระที่ 1 การอ่าน (ท 1.1 ป.6/2 - ความหมายโดยนัย)",
+                passage: null,
+                stem: "ข้อ 1. ข้อใดใช้คำที่มี \"ความหมายโดยนัย\" ได้ถูกต้องตามบริบทของประโยค",
+                choices: [
+                    "1. คุณลุงสมชายเป็นคนมือสะอาด จึงได้รับเลือกให้เป็นเหรัญญิกดูแลเงินกองทุนของหมู่บ้าน",
+                    "2. แม่บอกให้น้องไปล้างมือให้สะอาดก่อนมารับประทานอาหารเย็นร่วมกัน",
+                    "3. พี่สาวช่วยคุณแม่จัดเก้าอี้ไม้สักไว้รับรองแขกที่ห้องรับแขกชั้นล่าง",
+                    "4. บนท้องฟ้าคืนเดือนมืดมีดวงดาวส่องแสงระยิบระยับสวยงามจับตา"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> คำว่า <strong>\"มือสะอาด\"</strong> ในข้อ 1 เป็นความหมายโดยนัย (ความหมายเปรียบเทียบ) หมายถึง ผู้ที่มีความซื่อสัตย์สุจริต ไม่ทุจริตคดโกง ส่วนข้อ 2, 3 และ 4 เป็นความหมายโดยตรงตามพจนานุกรม"
+            },
+            {
+                no: 2,
+                strand: "ข้อที่ 2/22 | สาระที่ 1 การอ่าน (ท 1.1 ป.6/2 - โวหารภาพพจน์)",
+                passage: "<strong>อ่านบทร้อยกรองต่อไปนี้แล้วตอบคำถามข้อ 2</strong><br>\"พระคุณแม่ยิ่งใหญ่ดั่งสายน้ำ &nbsp;&nbsp;&nbsp;&nbsp; คอยชุ่มฉ่ำหล่อเลี้ยงลูกทั้งหลาย<br>แม้นเหน็ดเหนื่อยเมื่อยล้าทั้งใจกาย &nbsp;&nbsp;&nbsp;&nbsp; มิเคยคลายความรักที่เมตตา\"",
+                stem: "ข้อ 2. บทร้อยกรองข้างต้นใช้โวหารภาพพจน์และการเรียบเรียงตรงกับข้อใดเด่นชัดที่สุด",
+                choices: [
+                    "1. บรรยายโวหาร โดยลำดับขั้นตอนการเลี้ยงดูลูกตั้งแต่เล็กจนโต",
+                    "2. อุปมาโวหาร โดยเปรียบเทียบพระคุณของแม่ว่าเหมือนสายน้ำที่ชุ่มฉ่ำ",
+                    "3. อุปลักษณ์โวหาร โดยเปรียบเทียบว่าแม่คือเรือจ้างที่พาลูกข้ามฝั่ง",
+                    "4. สาธกโวหาร โดยยกตัวอย่างนิทานพื้นบ้านมาประกอบการอธิบาย"
+                ],
+                correctIndex: 1,
+                exp: "<strong>เฉลย ข้อ 2 :</strong> ในบทร้อยกรองมีคำว่า <strong>\"ดั่ง\"</strong> (\"พระคุณแม่ยิ่งใหญ่ดั่งสายน้ำ\") ซึ่งเป็นคำเชื่อมเปรียบเทียบว่าสิ่งหนึ่งเหมือนกับอีกสิ่งหนึ่ง จัดเป็น <strong>อุปมาโวหาร</strong>"
+            },
+            {
+                no: 3,
+                strand: "ข้อที่ 3/22 | สาระที่ 1 การอ่าน (ท 1.1 ป.6/4 - แยกข้อเท็จจริงและข้อคิดเห็น)",
+                passage: "<strong>อ่านข้อความต่อไปนี้แล้วตอบคำถามข้อ 3</strong><br>(1) โรคไข้เลือดออกมียุงลายเป็นพาหะนำโรคที่สำคัญและมักระบาดหนักในฤดูฝน (2) ผู้ป่วยโรคไข้เลือดออกส่วนใหญ่มักมีอาการไข้สูงเฉียบพลันติดต่อกันหลายวัน (3) การดื่มน้ำสมุนไพรพื้นบ้านน่าจะช่วยป้องกันยุงลายกัดได้ดีกว่าการใช้ยาทากันยุง (4) ดังนั้นทุกครอบครัวควรช่วยกันจัดสวนหน้าบ้านให้สวยงามน่าอยู่เสมอ",
+                stem: "ข้อ 3. ข้อความหมายเลขใดในบทความข้างต้นเป็น \"ข้อเท็จจริง\" ทั้งหมด",
+                choices: [
+                    "1. หมายเลข (1) และ (2)",
+                    "2. หมายเลข (1) และ (3)",
+                    "3. หมายเลข (2) และ (4)",
+                    "4. หมายเลข (3) และ (4)"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> หมายเลข <strong>(1) และ (2)</strong> เป็นข้อมูลทางการแพทย์ที่พิสูจน์ได้ (ข้อเท็จจริง) ส่วนหมายเลข (3) มีคำว่า <strong>\"น่าจะ\"</strong> และหมายเลข (4) มีคำว่า <strong>\"ควร\"</strong> จึงเป็นข้อคิดเห็น"
+            },
+            {
+                no: 4,
+                strand: "ข้อที่ 4/22 | สาระที่ 1 การอ่าน (ท 1.1 ป.6/5 - จับใจความสำคัญ)",
+                passage: "<strong>อ่านข้อความต่อไปนี้แล้วตอบคำถามข้อ 4</strong><br>\"ผักพื้นบ้านของไทย เช่น ตำลึง ขี้เหล็ก กระถิน และสะเดา ล้วนมีคุณค่าทางโภชนาการและสรรพคุณทางยาสูง ตำลึงช่วยบำรุงสายตา ดอกขี้เหล็กช่วยให้หลับสบายและคลายเครียด ส่วนยอดสะเดาช่วยเจริญอาหาร นอกจากนี้ผักพื้นบ้านยังปลูกง่าย ทนทานต่อโรคและแมลง จึงปลอดจากสารเคมีตกค้าง การรับประทานผักพื้นบ้านจึงส่งผลดีต่อสุขภาพร่างกายอย่างยิ่ง\"",
+                stem: "ข้อ 4. ใจความสำคัญของข้อความข้างต้นตรงกับข้อใด",
+                choices: [
+                    "1. ตำลึง ขี้เหล็ก กระถิน และสะเดา เป็นผักพื้นบ้านที่คนไทยนิยมปลูกไว้ริมรั้ว",
+                    "2. ผักพื้นบ้านของไทยมีความทนทานต่อโรคและแมลงจึงไม่ต้องฉีดสารเคมี",
+                    "3. ผักพื้นบ้านของไทยมีคุณค่าทางอาหาร สรรพคุณทางยา และปลอดภัยต่อสุขภาพ",
+                    "4. ดอกขี้เหล็กมีสรรพคุณช่วยคลายเครียดและทำให้นอนหลับสบายในเวลากลางคืน"
+                ],
+                correctIndex: 2,
+                exp: "<strong>เฉลย ข้อ 3 :</strong> เพราะครอบคลุมประเด็นสำคัญทั้งหมดของย่อหน้า (คุณค่าทางอาหาร + สรรพคุณทางยา + ปลอดสารเคมีดีต่อสุขภาพ) ส่วนข้อ 1, 2 และ 4 เป็นเพียงรายละเอียดปลีกย่อย"
+            },
+            {
+                no: 5,
+                strand: "ข้อที่ 5/22 | สาระที่ 1 การอ่าน (ท 1.1 ป.6/5 - นำความรู้ไปตัดสินใจแก้ปัญหา)",
+                passage: "<strong>อ่านประกาศต่อไปนี้แล้วตอบคำถามข้อ 5</strong><br>\"ประกาศการประปานครหลวง : เนื่องจากมีการซ่อมบำรุงท่อประธานส่งน้ำบริเวณถนนสุขสวัสดิ์ จึงมีความจำเป็นต้องหยุดจ่ายน้ำประปาชั่วคราว ในวันเสาร์ที่ 14 พฤศจิกายน 2569 ตั้งแต่เวลา 22.00 น. ถึงวันอาทิตย์ที่ 15 พฤศจิกายน 2569 เวลา 05.00 น. ขอให้ประชาชนในพื้นที่สำรองน้ำไว้ใช้ล่วงหน้า\"",
+                stem: "ข้อ 5. จากประกาศข้างต้น บุคคลในข้อใดปฏิบัติตนในการนำข้อมูลไปตัดสินใจแก้ปัญหาได้ถูกต้องที่สุด",
+                choices: [
+                    "1. ก้องรีบเปิดน้ำใส่ถังสำรองไว้ตั้งแต่ช่วงเย็นวันเสาร์ที่ 14 พฤศจิกายน เพื่อใช้ในคืนนั้น",
+                    "2. แก้วซักผ้าและล้างจานทั้งหมดในเวลา 23.00 น. ของวันเสาร์ที่ 14 พฤศจิกายน",
+                    "3. กล้าโทรศัพท์แจ้งเจ้าหน้าที่ให้มาซ่อมท่อประปาในเช้าวันเสาร์ที่ 14 พฤศจิกายน",
+                    "4. กิ่งงดใช้น้ำประปาตลอดทั้งวันอาทิตย์ที่ 15 พฤศจิกายน ตั้งแต่เช้าจนถึงเที่ยงคืน"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> เพราะประกาศหยุดจ่ายน้ำตั้งแต่เวลา 22.00 น. ของคืนวันเสาร์ที่ 14 พ.ย. การที่ก้องสำรองน้ำไว้ตั้งแต่ช่วงเย็นวันเสาร์จึงเป็นการเตรียมพร้อมแก้ปัญหาได้ถูกต้องตามเวลาที่ประกาศ"
+            },
+            {
+                no: 6,
+                strand: "ข้อที่ 6/22 | สาระที่ 1 การอ่าน (ท 1.1 ป.6/7 - อ่านข้อมูลจากตารางและแผนภูมิ)",
+                passage: "<strong>ตารางสถิติการยืมหนังสือห้องสมุดโรงเรียนแห่งหนึ่ง (มิถุนายน - สิงหาคม)</strong><br>• หมวดนิทานและวรรณกรรม : มิ.ย. 120 เล่ม | ก.ค. 150 เล่ม | ส.ค. 180 เล่ม (รวม 450 เล่ม)<br>• หมวดวิทยาศาสตร์น่ารู้ : มิ.ย. 100 เล่ม | ก.ค. 140 เล่ม | ส.ค. 160 เล่ม (รวม 400 เล่ม)<br>• หมวดประวัติศาสตร์และสังคม : มิ.ย. 80 เล่ม | ก.ค. 70 เล่ม | ส.ค. 90 เล่ม (รวม 240 เล่ม)<br>• หมวดสุขภาพและกีฬา : มิ.ย. 60 เล่ม | ก.ค. 80 เล่ม | ส.ค. 70 เล่ม (รวม 210 เล่ม)",
+                stem: "ข้อ 6. จากข้อมูลในตารางข้างต้น ข้อใดกล่าวถูกต้อง",
+                choices: [
+                    "1. ยอดการยืมหนังสือทุกหมวดมีแนวโน้มเพิ่มขึ้นอย่างต่อเนื่องทุกเดือน",
+                    "2. เดือนกรกฎาคมมียอดการยืมหนังสือรวมทุกหมวดมากกว่าเดือนมิถุนายนอยู่ 80 เล่ม",
+                    "3. หมวดวิทยาศาสตร์น่ารู้มียอดการยืมรวม 3 เดือนน้อยกว่าหมวดประวัติศาสตร์และสังคม",
+                    "4. เดือนสิงหาคมมียอดการยืมหนังสือหมวดสุขภาพและกีฬามากที่สุดในรอบ 3 เดือน"
+                ],
+                correctIndex: 1,
+                exp: "<strong>เฉลย ข้อ 2 :</strong> เพราะยอดรวมเดือนมิถุนายน = 120+100+80+60 = <strong>360 เล่ม</strong> และเดือนกรกฎาคม = 150+140+70+80 = <strong>440 เล่ม</strong> ดังนั้น เดือนกรกฎาคมจึงมากกว่าเดือนมิถุนายนอยู่ 440 - 360 = <strong>80 เล่ม</strong>"
+            },
+            {
+                no: 7,
+                strand: "ข้อที่ 7/22 | สาระที่ 2 การเขียน (ท 2.1 ป.6/2 - เขียนสื่อสารด้วยถ้อยคำเหมาะสม)",
+                passage: null,
+                stem: "ข้อ 7. เด็กชายต้นต้องการเขียนคำอวยพรในบัตรอวยพรวันเกิดมอบให้ \"คุณปู่\" ข้อความในข้อใดใช้ถ้อยคำได้ถูกต้องและเหมาะสมที่สุด",
+                choices: [
+                    "1. สุขสันต์วันเกิดครับคุณปู่ ขอให้คุณปู่สุขภาพแข็งแรง อยู่เป็นร่มโพธิ์ร่มไทรของลูกหลานไปนานๆ นะครับ",
+                    "2. แฮปปี้เบิร์ธเดย์ครับคุณปู่ ขอให้คุณปู่มีความสุขมากๆ คิดหวังสิ่งใดก็ขอให้สมปรารถนาทุกประการนะครับ",
+                    "3. เนื่องในวันคล้ายวันเกิดของคุณปู่ ข้าพเจ้าขออวยพรให้ท่านเจริญด้วยอายุ วรรณะ สุขะ พละ เทอญ",
+                    "4. วันเกิดปีนี้ ผมขอให้คุณปู่ร่ำรวยเงินทอง มีความก้าวหน้าในหน้าที่การงานและไม่เจ็บไม่ไข้นะครับ"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> เพราะใช้ภาษาสุภาพอบอุ่น เหมาะสมกับผู้สูงอายุที่เป็นคุณปู่ (\"มีสุขภาพแข็งแรง อยู่เป็นร่มโพธิ์ร่มไทรของลูกหลาน\")"
+            },
+            {
+                no: 8,
+                strand: "ข้อที่ 8/22 | สาระที่ 2 การเขียน (ท 2.1 ป.6/6 - เขียนจดหมายส่วนตัว)",
+                passage: null,
+                stem: "ข้อ 8. ในการเขียนจดหมายส่วนตัวเพื่อ \"แสดงความขอบคุณคุณป้า\" ที่ส่งหนังสือเรียนมาให้ ข้อใดใช้คำขึ้นต้น สรรพนาม และคำลงท้ายได้ถูกต้อง",
+                choices: [
+                    "1. คำขึ้นต้น: กราบเท้าคุณป้าที่เคารพอย่างสูง | สรรพนามแทนตัว: ลูก | คำลงท้าย: ด้วยความเคารพอย่างสูง",
+                    "2. คำขึ้นต้น: กราบเรียนคุณป้าที่เคารพรักอย่างสูง | สรรพนามแทนตัว: หลาน | คำลงท้าย: ด้วยความเคารพรักอย่างสูง",
+                    "3. คำขึ้นต้น: เรียนคุณป้าที่เคารพ | สรรพนามแทนตัว: ข้าพเจ้า | คำลงท้าย: ขอแสดงความนับถือ",
+                    "4. คำขึ้นต้น: สวัสดีครับคุณป้าที่รัก | สรรพนามแทนตัว: ผม | คำลงท้าย: รักและคิดถึงเสมอ"
+                ],
+                correctIndex: 1,
+                exp: "<strong>เฉลย ข้อ 2 :</strong> เพราะคุณป้าเป็นญาติผู้ใหญ่ คำขึ้นต้นใช้ <strong>\"กราบเรียนคุณป้าที่เคารพรักอย่างสูง\"</strong> สรรพนามแทนตัวใช้ <strong>\"หลาน\"</strong> และคำลงท้ายใช้ <strong>\"ด้วยความเคารพรักอย่างสูง\"</strong>"
+            },
+            {
+                no: 9,
+                strand: "ข้อที่ 9/22 | สาระที่ 3 การฟัง การดู และการพูด (ท 3.1 ป.6/2 - ตั้งคำถามเชิงเหตุผล)",
+                passage: "<strong>อ่านสถานการณ์ต่อไปนี้แล้วตอบคำถามข้อ 9</strong><br>\"นักเรียนชั้น ป.6 ได้ชมนิทรรศการเรื่อง วิกฤตขยะพลาสติกในทะเลไทย ซึ่งนำเสนอข้อมูลว่า ในแต่ละปีมีขยะพลาสติกไหลลงสู่ทะเลเป็นจำนวนมาก ส่งผลให้สัตว์ทะเลหายาก เช่น เต่าทะเลและพะยูน กินขยะพลาสติกเข้าไปเพราะคิดว่าเป็นอาหาร จนทำให้เสียชีวิตเป็นจำนวนมาก\"",
+                stem: "ข้อ 9. หากนักเรียนต้องตั้ง \"คำถามเชิงเหตุผล\" เพื่อนำไปสู่การแก้ปัญหาที่ต้นเหตุ ควรตั้งคำถามตามข้อใด",
+                choices: [
+                    "1. ในแต่ละปีมีเต่าทะเลและพะยูนเสียชีวิตจากขยะพลาสติกจำนวนกี่ตัว",
+                    "2. นิทรรศการเรื่องวิกฤตขยะพลาสติกในทะเลไทยจัดขึ้นที่สถานที่ใด",
+                    "3. เราจะมีแนวทางลดการใช้พลาสติกในชีวิตประจำวันอย่างไรเพื่อไม่ให้ขยะไหลลงสู่ทะเล",
+                    "4. สัตว์ทะเลชนิดใดบ้างที่มักเข้าใจผิดว่าขยะพลาสติกเป็นอาหารของพวกมัน"
+                ],
+                correctIndex: 2,
+                exp: "<strong>เฉลย ข้อ 3 :</strong> เพราะเป็นคำถามเชิงเหตุผลที่กระตุ้นให้คิดวิเคราะห์หาแนวทางแก้ไขปัญหาที่ต้นเหตุ ส่วนข้อ 1, 2 และ 4 เป็นเพียงคำถามถามความจำพื้นฐาน"
+            },
+            {
+                no: 10,
+                strand: "ข้อที่ 10/22 | สาระที่ 3 การฟัง การดู และการพูด (ท 3.1 ป.6/2 - วิเคราะห์สื่อสังคมออนไลน์)",
+                passage: "<strong>อ่านข้อความจากสื่อสังคมออนไลน์ต่อไปนี้แล้วตอบคำถามข้อ 10</strong><br>\"ด่วนที่สุด! ใครที่มีอาการปวดศีรษะบ่อยๆ ให้นำน้ำมะนาวผสมเกลือมาหยอดตาวันละ 3 หยด อาการปวดศีรษะจะหายขาดทันที แชร์ต่อได้บุญ!\"",
+                stem: "ข้อ 10. เมื่อเห็นข้อความข้างต้นในสื่อสังคมออนไลน์ นักเรียนควรปฏิบัติอย่างไรจึงจะแสดงถึงการฟังและดูอย่างมีวิจารณญาณ",
+                choices: [
+                    "1. รีบกดแชร์ส่งต่อให้ญาติผู้ใหญ่ทันทีเพราะต้องการช่วยเหลือผู้ที่มีอาการปวดศีรษะ",
+                    "2. ทดลองนำน้ำมะนาวผสมเกลือมาหยอดตาตนเองเพื่อพิสูจน์ว่าเป็นความจริงหรือไม่",
+                    "3. ไม่หลงเชื่อและไม่แชร์ต่อ เพราะไม่มีแหล่งอ้างอิงทางการแพทย์และอาจเป็นอันตรายต่อดวงตา",
+                    "4. แสดงความคิดเห็นตำหนิผู้โพสต์ด้วยถ้อยคำรุนแรงเพื่อให้ลบข้อความนั้นออกทันที"
+                ],
+                correctIndex: 2,
+                exp: "<strong>เฉลย ข้อ 3 :</strong> เพราะข้อความดังกล่าวเป็นข่าวปลอมที่ไม่มีหลักฐานทางการแพทย์รองรับ และกรดจากน้ำมะนาวผสมเกลือเป็นอันตรายต่อดวงตาอย่างร้ายแรง จึงไม่ควรหลงเชื่อและไม่แชร์ต่อ"
+            },
+            {
+                no: 11,
+                strand: "ข้อที่ 11/22 | สาระที่ 3 การฟัง การดู และการพูด (ท 3.1 ป.6/3 - วิเคราะห์สื่อโฆษณา)",
+                passage: null,
+                stem: "ข้อ 11. ข้อความโฆษณาในข้อใดมีความน่าเชื่อถือและมีเหตุผลมากที่สุด",
+                choices: [
+                    "1. นมถั่วเหลืองตราธัญพืช คัดสรรเมล็ดถั่วเหลืองแท้ มีโปรตีนและแคลเซียม ผ่านการรับรองมาตรฐาน อย.",
+                    "2. ครีมทาผิวตราไข่มุก ทาเพียงคืนเดียวผิวขาวกระจ่างใสอมชมพูถาวร ลบเลือนริ้วรอยได้ 100%",
+                    "3. ยาแคปซูลสมุนไพรเทวดา รักษาได้สารพัดโรคตั้งแต่โรคเบาหวานไปจนถึงโรคมะเร็งระยะสุดท้าย",
+                    "4. เครื่องดื่มวิตามินบำรุงสมอง ดื่มแล้วฉลาดล้ำเลิศ สอบได้ที่ 1 ของโรงเรียนอย่างแน่นอนโดยไม่ต้องอ่านหนังสือ"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> เพราะระบุส่วนประกอบและสารอาหารตามความเป็นจริง พร้อมทั้งมีเครื่องหมาย อย. รับรอง ส่วนข้อ 2, 3 และ 4 โฆษณาเกินจริง"
+            },
+            {
+                no: 12,
+                strand: "ข้อที่ 12/22 | สาระที่ 4 หลักการใช้ภาษาไทย (ท 4.1 ป.6/1 - ชนิดและหน้าที่ของคำ)",
+                passage: null,
+                stem: "ข้อ 12. คำว่า \"ความ\" ในข้อใดทำหน้าที่เป็น \"อาการนาม\" ทั้งหมด",
+                choices: [
+                    "1. ความสุข   ความดี   ความเจริญ",
+                    "2. ความหมาย   ความดัน   ความลับ",
+                    "3. ความคิด   ความทุกข์   ความบ้าน",
+                    "4. ความรัก   ความจริง   ความเมือง"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> เพราะคำว่า <strong>\"ความ\"</strong> นำหน้าคำวิเศษณ์/คำกริยา (สุข, ดี, เจริญ) ทั้ง 3 คำจึงเป็นอาการนามทั้งหมด (ส่วน ความบ้าน, ความเมือง นำหน้าคำนาม จึงไม่ใช่อาการนาม)"
+            },
+            {
+                no: 13,
+                strand: "ข้อที่ 13/22 | สาระที่ 4 หลักการใช้ภาษาไทย (ท 4.1 ป.6/1 - คำบุพบท)",
+                passage: null,
+                stem: "ข้อ 13. คำในวงเล็บของข้อใดทำหน้าที่เป็น \"คำบุพบท\" บอกตำแหน่ง",
+                choices: [
+                    "1. คุณยายวางตะกร้าหมากพลูไว้ (บน) โต๊ะไม้สักในห้องรับแขก",
+                    "2. น้องเดินขึ้นไปเล่นกับเพื่อนข้าง (บน) ตั้งแต่วันเสาร์",
+                    "3. บ้านไม้หลัง (ที่) อยู่ใกล้ตลาดน้ำเป็นบ้านของคุณตาฉัน",
+                    "4. นักเรียนชั้นประถมศึกษาปีที่ 6 ยืนเข้าแถวอยู่ด้าน (ใน)"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> เพราะคำว่า <strong>\"บน\"</strong> นำหน้าคำนาม <strong>\"โต๊ะไม้สัก\"</strong> เพื่อบอกตำแหน่งสถานที่ จึงเป็นคำบุพบท (ส่วน \"ข้างบน\" และ \"ด้านใน\" ไม่มีคำนามตามหลัง จึงเป็นคำวิเศษณ์)"
+            },
+            {
+                no: 14,
+                strand: "ข้อที่ 14/22 | สาระที่ 4 หลักการใช้ภาษาไทย (ท 4.1 ป.6/2 - คำราชาศัพท์)",
+                passage: null,
+                stem: "ข้อ 14. ประโยคในข้อใดใช้ \"คำราชาศัพท์\" ได้ถูกต้องตามหลักภาษาไทย",
+                choices: [
+                    "1. พระบาทสมเด็จพระเจ้าอยู่หัวทรงเสด็จพระราชดำเนินไปทรงเปิดงานนิทรรศการ",
+                    "2. สมเด็จพระกนิษฐาธิราชเจ้าฯ ทอดพระเนตรการแสดงดนตรีไทยของนักเรียนอย่างสนพระราชหฤทัย",
+                    "3. พระมหากษัตริย์ในสมัยโบราณทรงเสวยพระกระยาหารร่วมกับเหล่าเสนาบดีในท้องพระโรง",
+                    "4. สมเด็จพระนางเจ้าฯ พระบรมราชินี ทรงตรัสทักทายราษฎรที่มาเฝ้าทูลละอองธุลีพระบาท"
+                ],
+                correctIndex: 1,
+                exp: "<strong>เฉลย ข้อ 2 :</strong> เพราะใช้คำว่า <strong>\"ทอดพระเนตร\"</strong> และ <strong>\"สนพระราชหฤทัย\"</strong> ได้ถูกต้อง ส่วนข้อ 1 (ทรงเสด็จ), ข้อ 3 (ทรงเสวย), ข้อ 4 (ทรงตรัส) ผิดเพราะห้ามใช้ \"ทรง\" นำหน้ากริยาราชาศัพท์"
+            },
+            {
+                no: 15,
+                strand: "ข้อที่ 15/22 | สาระที่ 4 หลักการใช้ภาษาไทย (ท 4.1 ป.6/3 - คำที่มาจากภาษาต่างประเทศ)",
+                passage: null,
+                stem: "ข้อ 15. ข้อใดมีคำที่มาจาก \"ภาษาเขมร\" ทุกคำ",
+                choices: [
+                    "1. ถนน   เจริญ   เสด็จ   ตำรวจ",
+                    "2. ก๋วยเตี๋ยว   เก้าอี้   สมอง   กำเนิด",
+                    "3. กิจกรรม   วัฒนธรรม   เดิน   สำเร็จ",
+                    "4. คลินิก   ฟุตบอล   ขนาน   เผชิญ"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> คำว่า <strong>ถนน, เจริญ, เสด็จ, ตำรวจ</strong> มาจากภาษาเขมรทั้งหมด (สังเกตอักษรนำ คำขึ้นต้น ตำ- และตัวสะกด จ, ญ)"
+            },
+            {
+                no: 16,
+                strand: "ข้อที่ 16/22 | สาระที่ 4 หลักการใช้ภาษาไทย (ท 4.1 ป.6/4 - ลักษณะของประโยค)",
+                passage: null,
+                stem: "ข้อ 16. ข้อใดเป็น \"ประโยคซ้อน\" (ประโยคความซ้อน)",
+                choices: [
+                    "1. พ่อปลูกต้นมะม่วงและแม่รดน้ำแปลงผักสวนครัวหลังบ้าน",
+                    "2. ถึงแม้ว่าฝนจะตกหนักมากแต่พี่ชายก็ยังเดินทางไปทำงานตรงเวลา",
+                    "3. คุณครูมอบเกียรติบัตรให้แก่นักเรียนที่ทำความดีช่วยเหลือสังคม",
+                    "4. น้องจะเลือกอ่านหนังสือนิทานอีสปหรือจะวาดภาพระบายสีในห้องสมุด"
+                ],
+                correctIndex: 2,
+                exp: "<strong>เฉลย ข้อ 3 :</strong> เพราะมีประโยคหลัก + ประโยคย่อยเชื่อมด้วยประพันธสรรพนาม <strong>\"ที่\"</strong> ขยายคำว่านักเรียน จึงเป็นประโยคซ้อน (ข้อ 1, 2, 4 เป็นประโยครวม)"
+            },
+            {
+                no: 17,
+                strand: "ข้อที่ 17/22 | สาระที่ 4 หลักการใช้ภาษาไทย (ท 4.1 ป.6/5 - แต่งบทร้อยกรองกลอนสุภาพ)",
+                passage: "<strong>พิจารณาบทร้อยกรองกลอนสุภาพต่อไปนี้แล้วตอบคำถามข้อ 17</strong><br>\"อันความรู้มีค่ามหา<strong>ศาล</strong> &nbsp;&nbsp;&nbsp;&nbsp; ................................................<br>หมั่นศึกษาค้นคว้าทุกคืน<strong>วัน</strong> &nbsp;&nbsp;&nbsp;&nbsp; เพื่อสร้างสรรค์อนาคตงดงามเอย\"",
+                stem: "ข้อ 17. การเติมวรรคที่หายไปในข้อใดถูกต้องตามฉันทลักษณ์ของ \"กลอนสุภาพ\" ทั้งสัมผัสบังคับและเสียงวรรณยุกต์ท้ายวรรค",
+                choices: [
+                    "1. เป็นรากฐานชีวิตให้สุขสันต์",
+                    "2. เปรียบเสมือนสายธารอันกว้างใหญ่",
+                    "3. ต้องพากเพียรเรียนรู้สู่วิชา",
+                    "4. ดั่งดวงแก้วแวววาวสกาวใจ"
+                ],
+                correctIndex: 0,
+                exp: "<strong>เฉลย ข้อ 1 :</strong> คำว่า <strong>\"ศาล\"</strong> (ท้ายวรรค 1) ส่งสัมผัสไปยังคำว่า <strong>\"ฐาน\"</strong> (คำที่ 3 ของวรรค 2) และคำว่า <strong>\"สันต์\"</strong> (ท้ายวรรค 2 เสียงจัตวา) ส่งสัมผัสไปยังคำว่า <strong>\"วัน\"</strong> (ท้ายวรรค 3) ได้ถูกต้องครบถ้วน"
+            },
+            {
+                no: 18,
+                strand: "ข้อที่ 18/22 | สาระที่ 4 หลักการใช้ภาษาไทย (ท 4.1 ป.6/6 - สำนวนสุภาษิตคำพังเพย)",
+                passage: "<strong>อ่านสถานการณ์ต่อไปนี้แล้วตอบคำถามข้อ 18</strong><br>\"สมศักดิ์ต้องการจับหนูนาเพียงตัวเดียวที่วิ่งเข้าไปหลบในกองฟางหลังบ้าน เขาจึงตัดสินใจจ้างรถแบ็กโฮขนาดใหญ่มาขุดรื้อกองฟางและทุบโรงนาทิ้ง เสียค่าจ้างไปหลายหมื่นบาท\"",
+                stem: "ข้อ 18. สถานการณ์ข้างต้นตรงกับสำนวนไทยในข้อใด",
+                choices: [
+                    "1. วัวหายล้อมคอก",
+                    "2. ขี่ช้างจับตั๊กแตน",
+                    "3. ชิงสุกก่อนห่าม",
+                    "4. เห็นช้างขี้ ขี้ตามช้าง"
+                ],
+                correctIndex: 1,
+                exp: "<strong>เฉลย ข้อ 2 :</strong> <strong>\"ขี่ช้างจับตั๊กแตน\"</strong> หมายถึง ลงทุนลงแรงหรือเสียเงินจำนวนมากเพื่อทำเรื่องเล็กน้อย ได้ผลไม่คุ้มค่า"
+            },
+            {
+                no: 19,
+                strand: "ข้อที่ 19/22 | สาระที่ 5 วรรณคดีและวรรณกรรม (ท 5.1 ป.5/2 - ข้อคิดจากนิทานพื้นบ้าน)",
+                passage: "<strong>อ่านนิทานต่อไปนี้แล้วตอบคำถามข้อ 19</strong><br>\"เศรษฐีชราผู้หนึ่งมีบุตรชาย 3 คนที่มักทะเลาะเบาะแว้งกันเสมอ วันหนึ่งเศรษฐีจึงให้บุตรชายนำตะเกียบมาคนละ 1 อัน แล้วสั่งให้หักทิ้ง บุตรชายทั้งสามหักตะเกียบเดี่ยวได้โดยง่าย จากนั้นเศรษฐีจึงนำตะเกียบ 30 อันมามัดรวมกันแน่นแล้วให้บุตรชายผลัดกันหัก แต่ไม่มีใครสามารถหักมัดตะเกียบนั้นได้เลย เศรษฐีจึงสอนว่า พี่น้องก็เหมือนมัดตะเกียบ หากร่วมมือกันย่อมไม่มีใครทำลายได้\"",
+                stem: "ข้อ 19. ข้อคิดที่ได้จากนิทานข้างต้นตรงกับข้อใดมากที่สุด",
+                choices: [
+                    "1. ความกตัญญูกตเวทีต่อบิดามารดาทำให้ชีวิตเจริญรุ่งเรือง",
+                    "2. ความสามัคคีปรองดองกันในหมู่คณะก่อให้เกิดพลังที่เข้มแข็ง",
+                    "3. ความประหยัดอดออมช่วยให้ครอบครัวมีฐานะมั่นคงมั่งคั่ง",
+                    "4. ความขยันหมั่นเพียรในการทำงานทำให้ประสบความสำเร็จ"
+                ],
+                correctIndex: 1,
+                exp: "<strong>เฉลย ข้อ 2 :</strong> มัดตะเกียบที่รวมกันแน่นจนไม่มีใครหักได้ เปรียบเหมือนความสามัคคีปรองดองกันในหมู่คณะที่ก่อให้เกิดพลังเข้มแข็ง"
+            },
+            {
+                no: 20,
+                strand: "ข้อที่ 20/22 | สาระที่ 5 วรรณคดีและวรรณกรรม (ท 5.1 ป.6/1 และ ป.6/3 - คุณค่าวรรณคดี)",
+                passage: "<strong>อ่านบทร้อยกรองต่อไปนี้แล้วตอบคำถามข้อ 20 (สุภาษิตสอนหญิง)</strong><br>\"อันอ้อยตาลหวานลิ้นแล้วสิ้นซาก &nbsp;&nbsp;&nbsp;&nbsp; แต่ลมปากหวานหูไม่รู้หาย<br>ถึงเจ็บอื่นหมื่นแสนจะแคลนคลาย &nbsp;&nbsp;&nbsp;&nbsp; เจ็บจนตายนั้นเพราะเหน็บให้เจ็บใจ\"",
+                stem: "ข้อ 20. บทร้อยกรองข้างต้นสะท้อนคุณค่าและให้ข้อคิดในการดำเนินชีวิตตรงกับข้อใด",
+                choices: [
+                    "1. การเลือกรับประทานอาหารที่มีรสหวานแต่พอดีเพื่อสุขภาพฟันที่แข็งแรง",
+                    "2. การระมัดระวังคำพูด โดยเลือกใช้ถ้อยคำที่ไพเราะอ่อนหวานและไม่พูดจาเหน็บแนมผู้อื่น",
+                    "3. การอดทนต่อความเจ็บป่วยทางร่างกายโดยไม่ย่อท้อต่ออุปสรรคในการทำงาน",
+                    "4. การอนุรักษ์ขนมไทยโบราณที่ทำจากน้ำตาลอ้อยไว้ให้คนรุ่นหลังได้สืบทอดต่อไป"
+                ],
+                correctIndex: 1,
+                exp: "<strong>เฉลย ข้อ 2 :</strong> สอนให้เห็นความสำคัญของการใช้คำพูดที่ไพเราะอ่อนหวาน (\"ลมปากหวานหูไม่รู้หาย\") และหลีกเลี่ยงการพูดเหน็บแนมให้ผู้อื่นเจ็บช้ำน้ำใจ"
+            }
+        ];
+
+        // Add 20 MCQ slides
+        quizQuestions.forEach((q, idx) => {
+            const choicesHtml = q.choices.map((c, cIdx) => `
+                <div class="choice-item" onclick="selectChoice(${idx}, ${cIdx}, ${q.correctIndex})" id="q${idx}_c${cIdx}">
+                    <span>${c}</span>
+                    <span class="choice-status"></span>
+                </div>
+            `).join('');
+
+            slidesData.push({
+                menuTitle: `${slidesData.length + 1}. ข้อสอบข้อที่ ${q.no} (${q.strand.split('|')[1].trim().substring(0, 28)}...)`,
+                strand: q.strand,
+                title: `ตะลุยโจทย์ปรนัย 4 ตัวเลือก (ข้อละ 4 คะแนน)`,
+                isQuiz: true,
+                quizIndex: idx,
+                correctIndex: q.correctIndex,
+                html: `
+                    ${q.passage ? `<div class="passage-box">${q.passage}</div>` : ''}
+                    <div class="question-stem">${q.stem}</div>
+                    <div class="choices-list">${choicesHtml}</div>
+                    <div class="answer-panel" id="ans_panel_${idx}">
+                        💡 ${q.exp}
+                    </div>
+                `
+            });
+        });
+
+        // Add Question 21 (Ordering 5 points)
+        slidesData.push({
+            menuTitle: `${slidesData.length + 1}. ข้อสอบข้อที่ 21 : รูปแบบเรียงลำดับข้อความ (5 คะแนน)`,
+            strand: "ข้อที่ 21/22 | สาระที่ 2 การเขียน (รูปแบบเรียงลำดับข้อความ 5 คะแนน)",
+            title: "ตอนที่ 2 : พิจารณาภาพและคำที่กำหนดให้ แล้วเรียงลำดับคำที่ 1–10 ให้ถูกต้อง",
+            isQuiz: true,
+            quizIndex: 20,
+            html: `
+                <div style="display:flex; justify-content:center; margin-bottom:14px;">
+                    <img src="q21_word_order.png" alt="ข้อสอบเรียงลำดับคำ ข้อ 21" style="max-width:100%; max-height:410px; border-radius:16px; border:3px solid #cbd5e1; box-shadow:0 6px 20px rgba(0,0,0,0.08);" />
+                </div>
+                <div class="answer-panel" id="ans_panel_20" style="font-size:1.3rem;">
+                    <strong>✅ เฉลยข้อ 21 (เรียงลำดับคำ 10 คำ ได้ 5 คะแนนเต็ม) :</strong><br>
+                    • <strong>แบบที่ 1 (ขึ้นต้นด้วยเวลา) :</strong> <strong>9</strong> (วันนี้) ➔ <strong>2</strong> (คุณแม่) ➔ <strong>10</strong> (และ) ➔ <strong>7</strong> (ลูก) ➔ <strong>5</strong> (ช่วยกัน) ➔ <strong>1</strong> (ทำ) ➔ <strong>8</strong> (อาหารเย็น) ➔ <strong>6</strong> (ในครัว) ➔ <strong>3</strong> (อย่าง) ➔ <strong>4</strong> (อร่อย)<br>
+                    • <strong>แบบที่ 2 (ขึ้นต้นด้วยประธาน) :</strong> <strong>2</strong> (คุณแม่) ➔ <strong>10</strong> (และ) ➔ <strong>7</strong> (ลูก) ➔ <strong>5</strong> (ช่วยกัน) ➔ <strong>1</strong> (ทำ) ➔ <strong>8</strong> (อาหารเย็น) ➔ <strong>6</strong> (ในครัว) ➔ <strong>9</strong> (วันนี้) ➔ <strong>3</strong> (อย่าง) ➔ <strong>4</strong> (อร่อย)<br>
+                    <em>(ประโยคสมบูรณ์ : "วันนี้คุณแม่และลูกช่วยกันทำอาหารเย็นในครัวอย่างอร่อย")</em>
+                </div>
+            `
+        });
+
+        // Add Question 22 (Summary Writing 15 points)
+        slidesData.push({
+            menuTitle: `${slidesData.length + 1}. ข้อสอบข้อที่ 22 : อัตนัยเขียนย่อความ (15 คะแนน)`,
+            strand: "ข้อที่ 22/22 | สาระที่ 2 การเขียน (อัตนัยเขียนย่อความ 15 คะแนน)",
+            title: "ตอนที่ 3 : อ่านนิทานต่อไปนี้แล้วเขียนย่อความ (15 คะแนน)",
+            isQuiz: true,
+            quizIndex: 21,
+            html: `
+                <div class="passage-box" style="font-size:1.25rem; line-height:1.6;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;ในป่าใหญ่แห่งหนึ่งที่อุดมสมบูรณ์ มีลูกกระรอกน้อยชื่อว่า "ปุกปุย" อาศัยอยู่กับแม่บนต้นโอ๊กใหญ่ เมื่อย่างเข้าสู่ปลายฤดูฝน แม่กระรอกได้บอกกับปุกปุยว่า "ลูกเอ๋ย อีกไม่นานฤดูหนาวอันหนาวเหน็บก็จะมาถึงแล้ว พวกเราต้องรีบช่วยกันเก็บสะสมลูกไม้และเมล็ดพืชไว้ในโพรงไม้ตั้งแต่วันนี้ เพื่อจะได้มีอาหารกินตลอดฤดูหนาวนะจ๊ะ" แต่ปุกปุยเป็นลูกกระรอกที่เกียจคร้านและรักสนุก จึงตอบแม่ไปว่า "โธ่คุณแม่จ๋า ตอนนี้ในป่ายังมีผลไม้สุกเต็มต้นอยู่เลย ฉันขอไปวิ่งเล่นไล่จับผีเสื้อกับเพื่อนๆ ก่อนดีกว่า เอาไว้พรุ่งนี้ค่อยเก็บก็ยังทันจ้ะ"<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;ปุกปุยผัดวันประกันพรุ่งและออกไปวิ่งเล่นสนุกสนานทุกวันโดยไม่ยอมช่วยแม่เก็บสะสมอาหารเลย จนกระทั่งวันหนึ่งพายุลมหนาวพัดมาอย่างกะทันหัน ต้นไม้ใบหญ้าแห้งเหี่ยวและไม่มีผลไม้หลงเหลืออยู่ในป่าอีกเลย ปุกปุยรู้สึกหนาวสั่นและหิวโซมากแต่หาอาหารไม่ได้เลย เมื่อปุกปุยกลับมายังโพรงไม้ แม่กระรอกจึงแบ่งเมล็ดพืชที่แม่เก็บสะสมไว้ให้ปุกปุยกินจนอิ่ม ปุกปุยรู้สึกสำนึกผิดและละอายใจมาก จึงสัญญากับแม่ว่าตั้งแต่นี้ต่อไปจะไม่เกียจคร้านและจะไม่ผัดวันประกันพรุ่งอีกแล้ว เพราะเข้าใจแล้วว่าการเตรียมพร้อมไว้ล่วงหน้าช่วยให้รอดพ้นจากความเดือดร้อนได้<br>
+                    <strong>(ที่มา : นิทานเรื่อง กระรอกน้อยปุกปุย ของ ครูสมศรี รักษ์ภาษา จาก หนังสือนิทานคุณธรรมสอนใจ หน้า 24)</strong>
+                </div>
+                <div class="answer-panel" id="ans_panel_21" style="font-size:1.3rem;">
+                    <strong>✅ แนวการเขียนย่อความที่ได้คะแนนเต็ม 15 คะแนน :</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>ย่อนิทาน เรื่อง</strong> กระรอกน้อยปุกปุย <strong>ของ</strong> ครูสมศรี รักษ์ภาษา <strong>จาก</strong> หนังสือนิทานคุณธรรมสอนใจ หน้า 24 <strong>ความว่า</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;ปุกปุยเป็นลูกกระรอกที่เกียจคร้านและชอบผัดวันประกันพรุ่ง เมื่อแม่กระรอกชวนให้ช่วยกันเก็บสะสมอาหารไว้สำหรับฤดูหนาว ปุกปุยกลับไม่ยอมทำและมัวแต่ไปวิ่งเล่นทุกวัน จนกระทั่งฤดูหนาวมาถึงอย่างกะทันหันทำให้ไม่มีอาหารเหลือในป่า ปุกปุยหิวโซและหนาวสั่นแต่ได้รับความช่วยเหลือจากแม่ที่แบ่งอาหารที่เก็บสะสมไว้ให้กิน ปุกปุยจึงสำนึกผิดและสัญญาว่าจะไม่เกียจคร้านหรือผัดวันประกันพรุ่งอีก เพราะเห็นความสำคัญของการเตรียมพร้อมไว้ล่วงหน้า
+                </div>
+            `
+        });
+
+        let currentSlide = 0;
+
+        function renderSlides() {
+            const container = document.getElementById('slideContainer');
+            const selector = document.getElementById('slideSelector');
+            container.innerHTML = '';
+            selector.innerHTML = '';
+
+            slidesData.forEach((s, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = s.menuTitle;
+                selector.appendChild(opt);
+
+                const slideEl = document.createElement('div');
+                slideEl.className = 'slide' + (idx === 0 ? ' active' : '');
+                slideEl.id = 'slide_' + idx;
+
+                if (s.type === 'cover') {
+                    slideEl.innerHTML = s.html;
+                } else {
+                    slideEl.innerHTML = `
+                        <div class="slide-header">
+                            <div class="slide-title">${s.title}</div>
+                            <div class="strand-tag">${s.strand}</div>
+                        </div>
+                        <div class="slide-body">
+                            ${s.html}
+                        </div>
+                        <div style="text-align:center; padding-top:12px; margin-top:auto;">
+                            <div style="background:#ffffff; border:3px solid #f472b6; border-radius:20px; padding:8px 24px; display:inline-block; box-shadow:0 5px 0 #fbcfe8; color:#be185d; font-weight:700; font-size:1.05rem;">
+                                👩‍🏫 ผู้ออกแบบและพัฒนาสื่อการสอน : <strong>ครูเบ็ญจวรรณ สิงห์กุล</strong> | โรงเรียนวัดราษฎร์บำรุง สพป.สระบุรี เขต 2
+                            </div>
+                        </div>
+                    `;
+                }
+                container.appendChild(slideEl);
+            });
+            updateUI();
+        }
+
+        function updateUI() {
+            document.querySelectorAll('.slide').forEach((el, idx) => {
+                el.classList.toggle('active', idx === currentSlide);
+            });
+            document.getElementById('slideSelector').value = currentSlide;
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${slidesData.length}`;
+            const revealBtn = document.getElementById('globalRevealBtn');
+            if (slidesData[currentSlide].isQuiz) {
+                revealBtn.style.display = 'inline-block';
+            } else {
+                revealBtn.style.display = 'none';
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slidesData.length - 1) {
+                currentSlide++;
+                updateUI();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateUI();
+            }
+        }
+
+        function goToSlide(idx) {
+            currentSlide = parseInt(idx, 10);
+            updateUI();
+        }
+
+        function selectChoice(qIdx, cIdx, correctIdx) {
+            const clickedEl = document.getElementById(`q${qIdx}_c${cIdx}`);
+            const correctEl = document.getElementById(`q${qIdx}_c${correctIdx}`);
+            const panel = document.getElementById(`ans_panel_${qIdx}`);
+
+            if (cIdx === correctIdx) {
+                clickedEl.classList.add('correct-revealed');
+                clickedEl.querySelector('.choice-status').textContent = '✅ ถูกต้อง!';
+            } else {
+                clickedEl.classList.add('wrong-selected');
+                clickedEl.querySelector('.choice-status').textContent = '❌ ยังไม่ถูก';
+                correctEl.classList.add('correct-revealed');
+                correctEl.querySelector('.choice-status').textContent = '✅ คำตอบที่ถูก';
+            }
+            panel.classList.add('visible');
+        }
+
+        function toggleCurrentAnswer() {
+            const s = slidesData[currentSlide];
+            if (!s.isQuiz) return;
+            const qIdx = s.quizIndex;
+            const panel = document.getElementById(`ans_panel_${qIdx}`);
+            const isShowing = panel.classList.toggle('visible');
+
+            if (typeof s.correctIndex === 'number') {
+                const correctEl = document.getElementById(`q${qIdx}_c${s.correctIndex}`);
+                if (isShowing) {
+                    correctEl.classList.add('correct-revealed');
+                    correctEl.querySelector('.choice-status').textContent = '✅ คำตอบที่ถูก';
+                } else {
+                    correctEl.classList.remove('correct-revealed');
+                    correctEl.querySelector('.choice-status').textContent = '';
+                }
+            }
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                toggleCurrentAnswer();
+            }
+        });
+
+        renderSlides();
+    </script>
+</body>
+</html>

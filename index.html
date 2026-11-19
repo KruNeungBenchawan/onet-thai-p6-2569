@@ -125,12 +125,32 @@
             font-weight: 500;
         }
         .mascot-wrap {
-            background: rgba(255,255,255,0.18);
-            border: 3px dashed rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.28);
+            border: 4px solid #fde047;
             border-radius: 50%;
-            padding: 12px;
+            padding: 8px;
             flex-shrink: 0;
+            box-shadow: 0 12px 28px rgba(79, 70, 229, 0.35);
             animation: floatSlow 3.5s ease-in-out infinite;
+        }
+        .mascot-chibi-img {
+            width: 158px;
+            height: 158px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            border: 4px solid #ffffff;
+        }
+        .fx-star {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.2rem;
+            z-index: 9999;
+            animation: fxBurst 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes fxBurst {
+            0% { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3); opacity: 0; }
         }
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0px); }
@@ -336,7 +356,10 @@
                 </svg>
                 หน้าหลักห้องเรียนครูเบ็ญจวรรณ
             </a>
-            <div class="top-pill">🌈 ยินดีต้อนรับสู่ห้องเรียนติวเข้มภาษาไทย ป.6 • พิชิต 100 คะแนนเต็ม! 🎯</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                <button type="button" id="cheerVoiceBtn" class="top-pill" style="cursor:pointer;border-color:#8b5cf6;color:#6d28d9;box-shadow:0 4px 0 #ddd6fe;">🗣️ ฟังเสียงทักทาย ป.6</button>
+                <div class="top-pill">🌈 ยินดีต้อนรับสู่ห้องเรียนติวเข้มภาษาไทย ป.6 • พิชิต 100 คะแนนเต็ม! 🎯</div>
+            </div>
         </div>
 
         <div class="hero">
@@ -349,21 +372,7 @@
                 </div>
             </div>
             <div class="mascot-wrap">
-                <svg width="125" height="125" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="60" cy="60" r="56" fill="#FEF08A" stroke="#F59E0B" stroke-width="4"/>
-                    <ellipse cx="60" cy="70" rx="34" ry="32" fill="#8B5CF6"/>
-                    <ellipse cx="60" cy="76" rx="22" ry="22" fill="#DDD6FE"/>
-                    <circle cx="46" cy="54" r="13" fill="white" stroke="#4C1D95" stroke-width="3"/>
-                    <circle cx="74" cy="54" r="13" fill="white" stroke="#4C1D95" stroke-width="3"/>
-                    <circle cx="46" cy="54" r="6" fill="#1E1B4B"/>
-                    <circle cx="74" cy="54" r="6" fill="#1E1B4B"/>
-                    <circle cx="48" cy="51" r="2.5" fill="white"/>
-                    <circle cx="76" cy="51" r="2.5" fill="white"/>
-                    <polygon points="60,58 54,67 66,67" fill="#F59E0B"/>
-                    <polygon points="60,16 20,32 60,44 100,32" fill="#1E293B"/>
-                    <rect x="42" y="36" width="36" height="8" rx="3" fill="#334155"/>
-                    <line x1="92" y1="34" x2="96" y2="54" stroke="#FBBF24" stroke-width="4"/>
-                </svg>
+                <img src="chibi-thai-study.jpg" alt="การ์ตูน Chibi ติวเข้ม O-NET ภาษาไทย ป.6" class="mascot-chibi-img">
             </div>
         </div>
 
@@ -448,5 +457,60 @@
             <div>✨ จัดทำเพื่อประกอบการติวเพิ่มผลสัมฤทธิ์ O-NET วิชาภาษาไทย ชั้นประถมศึกษาปีที่ 6 ปีการศึกษา 2569 ✨</div>
         </div>
     </div>
+    <script>
+    (() => {
+      let ctx = null;
+      const playTone = (f, d = 0.09, delay = 0) => {
+        try {
+          if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+          if (ctx.state === "suspended") ctx.resume();
+          const t = ctx.currentTime + delay;
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = "triangle"; o.frequency.setValueAtTime(f, t);
+          g.gain.setValueAtTime(0.001, t);
+          g.gain.exponentialRampToValueAtTime(0.09, t + 0.015);
+          g.gain.exponentialRampToValueAtTime(0.001, t + d);
+          o.connect(g); g.connect(ctx.destination);
+          o.start(t); o.stop(t + d + 0.02);
+        } catch {}
+      };
+      const burst = (x, y) => {
+        const s = ["✦", "⭐", "💖", "✨", "🌸"];
+        const c = ["#f472b6", "#38bdf8", "#fbbf24", "#34d399", "#a78bfa"];
+        for (let i = 0; i < 10; i++) {
+          const el = document.createElement("span");
+          el.className = "fx-star"; el.textContent = s[i % s.length];
+          el.style.left = x + "px"; el.style.top = y + "px";
+          el.style.color = c[i % c.length];
+          const a = (Math.PI * 2 * i) / 10, dist = 34 + Math.random() * 44;
+          el.style.setProperty("--dx", Math.cos(a) * dist + "px");
+          el.style.setProperty("--dy", (Math.sin(a) * dist - 16) + "px");
+          document.body.appendChild(el); setTimeout(() => el.remove(), 750);
+        }
+      };
+      document.querySelectorAll(".stage-pill, .btn, .doc-item, .mascot-wrap").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          playTone(580, 0.07, 0); playTone(880, 0.1, 0.04);
+          burst(e.clientX || window.innerWidth / 2, e.clientY || 220);
+        });
+      });
+      const vBtn = document.getElementById("cheerVoiceBtn");
+      if (vBtn) {
+        vBtn.addEventListener("click", (e) => {
+          [523, 659, 784, 1046].forEach((n, i) => playTone(n, 0.13, i * 0.05));
+          burst(e.clientX, e.clientY);
+          if ("speechSynthesis" in window) {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance("สวัสดีค่ะนักเรียน ป.6 มาติวภาษาไทยพิชิตโอเน็ต 100 คะแนนเต็มไปด้วยกันนะคะ สู้ๆ ค่า");
+            u.lang = "th-TH"; u.pitch = 1.24; u.rate = 1.04;
+            const vs = window.speechSynthesis.getVoices().filter((v) => v.lang && v.lang.toLowerCase().includes("th"));
+            const fem = vs.find((v) => /premwadee|google|kanya|female|natural/i.test(v.name) && !/niwat|pattara|male/i.test(v.name));
+            if (fem) u.voice = fem; else if (vs[0]) u.voice = vs[0];
+            window.speechSynthesis.speak(u);
+          }
+        });
+      }
+    })();
+    </script>
 </body>
 </html>
